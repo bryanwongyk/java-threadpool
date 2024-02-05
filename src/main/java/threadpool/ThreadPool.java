@@ -7,25 +7,20 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class ThreadPool {
-    private final int nThreads;
     private final BlockingQueue<Runnable> taskQueue;
     private final List<PoolThreadRunnable> runnables;
     private boolean isStopped;
 
     public ThreadPool(int nThreads) {
-        this.nThreads = nThreads;
         this.taskQueue = new LinkedBlockingQueue<>(); // prefer LinkedBlockingQueue over ArrayBlockingQueue which would require us to initialize it with a size
         this.runnables = new ArrayList<>();
         this.isStopped = false;
 
-        // create each pool thread runnable
+        // create each pool thread and start them
         for (int i=0; i<nThreads; i++) {
             PoolThreadRunnable poolThreadRunnable = new PoolThreadRunnable(this.taskQueue);
             this.runnables.add(poolThreadRunnable);
-        }
-        // create and start each pool thread worker
-        for (Runnable runnable: this.runnables) {
-            new Thread(runnable).start();
+            new Thread(poolThreadRunnable).start();
         }
     }
 

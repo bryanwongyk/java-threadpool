@@ -33,14 +33,14 @@ class PoolThreadRunnable implements Runnable {
         }
     }
 
-    // synchronize as this is expected to be called by a thread outside the thread pool
+    // synchronize as this is expected to be called by outside thread - Thread Pool
     public synchronized void stop() {
         this.isStopped = true;
         // break the pool thread out of the .take() call which throws InterruptedException
         this.thread.interrupt();
     }
 
-    // synchronize as this will be called by another thread within the thread pool
+    // synchronize to ensure only 1 thread has access to this class when this is called
     public synchronized boolean isStopped() {
         return this.isStopped;
     }
