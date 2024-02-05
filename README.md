@@ -10,7 +10,7 @@ In most real use-cases, we can use Java's standard `ExecutorService` to create a
 
 This is just an exercise to implement a thread pool to understand how it works.
 
-[Thread Pool Overview](./threadpool-overview.png)
+![Thread Pool Overview](./threadpool-overview.png)
 
 ### References:
 - https://www.youtube.com/watch?v=ZcKt5FYd3bU&list=PLL8woMHwr36EDxjUoCzboZjedsnhLP1j4&index=12
